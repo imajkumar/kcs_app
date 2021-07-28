@@ -94,7 +94,7 @@
                                         <div class="col-lg-9 col-xl-9">
                                             <!-- <div class="summernote"></div> -->
 
-                                            <textarea name="txtVideoInfo" data-provide="markdown" id="txtVideoInfo" cols="5" class="form-control summernote" rows="10"></textarea>
+                                            <textarea name="txtVideoInfo"  id="txtVideoInfo" cols="5" class="form-control summernote" rows="10"></textarea>
 
                                             <div class="fv-plugins-message-container"></div>
                                             @error('txtVideoInfo')
