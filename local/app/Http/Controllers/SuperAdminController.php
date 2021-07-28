@@ -68,6 +68,54 @@ class SuperAdminController extends Controller
     }
     //getHighcartUsersAddedMonthly
 
+    //uploadFileSubcat
+    public function uploadFileSubcat(Request $request)
+    {
+        $validated = $request->validate([
+            'file' => 'required',
+            'txtVideoInfo' => 'required',
+            'sub_title' => 'required',
+            'sub_title' => 'required',
+        ]);
+
+
+        $users = DB::table('coursecat_list')
+            ->where('name_cat', $request->name_cat)
+            ->first();
+        if ($users == null) {
+
+        $file = $request->file('file');
+        $filename = $request->txtSID . "_user_VideoX" . rand(10, 1000) . "_" . date('Ymshis') . '.' . $file->getClientOriginalExtension();
+        // save to local/public/uploads/photo/ as the new $filename
+        //var/www/larachat/local/public/storage/users-avatar
+        $path = $file->storeAs('doc', $filename);
+
+
+            DB::table('coursecat_list')->insert([
+                'course_id' => $request->course_id,
+                'name_cat' => $request->name_cat,
+                'created_by' => Auth::user()->id,
+                'created_at' => date('Y-m-d H:i:s'),
+                'photo' => '',
+                'base_path' => '',
+                'video_name' => $filename,
+                'video_info' => $request->txtVideoInfo,
+                'sub_title' => $request->sub_title,
+
+
+            ]);
+            return redirect()->back()->with('success', 'File upload successfully');
+
+        }else{
+            return redirect()->back()->with('success', 'Alreay added ');
+        }
+
+
+       
+        
+    }
+    //uploadFileSubcat
+
 
     //uploadFile
     public function uploadFile(Request $request)
@@ -138,10 +186,10 @@ class SuperAdminController extends Controller
                 'status' => 1
             );
         }
-        if ($request->action == 31) {
-          
-           
-           
+        if ($request->action == 315) {
+
+
+
             $validated = $request->validate([
                 'file' => 'required',
                 'txtVideoInfo' => 'required',
@@ -149,28 +197,23 @@ class SuperAdminController extends Controller
             ]);
 
 
-               
-                $file = $request->file('file');
-                $filename = $request->txtSID . "_user_VideoX" . rand(10, 1000) . "_" . date('Ymshis') . '.' . $file->getClientOriginalExtension();
-                // save to local/public/uploads/photo/ as the new $filename
-                //var/www/larachat/local/public/storage/users-avatar
-                $path = $file->storeAs('doc', $filename);
-                
-               
-                $affected = DB::table('coursecat_list')
-                    ->where('id', $request->txtSID,)
-                    ->update([
-                        'video_name' => $filename,
-                        'video_info' => $request->txtVideoInfo,
-                        'sub_title' => $request->sub_title,
-                        
-                    ]);
-                    return redirect()->back()->with('success', 'File upload successfully');   
 
-            
-           
+            $file = $request->file('file');
+            $filename = $request->txtSID . "_user_VideoX" . rand(10, 1000) . "_" . date('Ymshis') . '.' . $file->getClientOriginalExtension();
+            // save to local/public/uploads/photo/ as the new $filename
+            //var/www/larachat/local/public/storage/users-avatar
+            $path = $file->storeAs('doc', $filename);
 
 
+            $affected = DB::table('coursecat_list')
+                ->where('id', $request->txtSID,)
+                ->update([
+                    'video_name' => $filename,
+                    'video_info' => $request->txtVideoInfo,
+                    'sub_title' => $request->sub_title,
+
+                ]);
+            return redirect()->back()->with('success', 'File upload successfully');
         }
 
 
@@ -393,8 +436,8 @@ class SuperAdminController extends Controller
                 'address' => $request->user_address,
                 'email' => $request->email,
                 'created_at' => date('Y-m-d'),
-                'avatar' =>'',
-                'base_path' =>'',
+                'avatar' => '',
+                'base_path' => '',
                 'password' => Hash::make($pass),
             ]);
             $dev_perm = Permission::where('slug', 'create-tasks')->first();
@@ -1039,7 +1082,7 @@ class SuperAdminController extends Controller
     //saveUserCouser
     public function saveUserCouser(Request $request)
     {
-       
+
         $course_id = $request->course_id;
         $emp_id = $request->user_id;
         $courseArr = DB::table('user_course_list')
@@ -1057,27 +1100,26 @@ class SuperAdminController extends Controller
             ]);
 
             DB::table('course_progress')
-            ->updateOrInsert(
-                ['user_id' => $emp_id, 'course_id' => $course_id],
-                [
-                    'point' => '0',
-                    'created_by' => $emp_id,
-                ]
-            );
+                ->updateOrInsert(
+                    ['user_id' => $emp_id, 'course_id' => $course_id],
+                    [
+                        'point' => '0',
+                        'created_by' => $emp_id,
+                    ]
+                );
             $data = array(
                 'msg' => 'Added Successfully',
                 'status' => 1
             );
             return response()->json($data);
-
-    }else{
-        $data = array(
-            'msg' => 'Already Exists',
-            'status' => 2
-        );
-        return response()->json($data);
+        } else {
+            $data = array(
+                'msg' => 'Already Exists',
+                'status' => 2
+            );
+            return response()->json($data);
+        }
     }
-}
     //saveUserCouser
 
 
@@ -1107,7 +1149,7 @@ class SuperAdminController extends Controller
                 'RecordID' => $value->id,
                 'IndexID' => $i,
                 'photo' => $schLogo,
-                'name' => $value->firstname." ".$value->lastname,
+                'name' => $value->firstname . " " . $value->lastname,
                 'email' =>  $value->email,
                 'phone' => $value->phone,
                 'gender' => $value->gender,

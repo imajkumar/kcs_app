@@ -136,6 +136,10 @@ Route::group(['middleware' => 'role:superadmin'], function() {
 
 
     Route::post('/uploadFile', [App\Http\Controllers\SuperAdminController::class, 'uploadFile'])->name('uploadFile');
+    Route::post('/uploadFileSubcat', [App\Http\Controllers\SuperAdminController::class, 'uploadFileSubcat'])->name('uploadFileSubcat');
+
+    
+
 
     
 
