@@ -145,6 +145,7 @@ class SuperAdminController extends Controller
             $validated = $request->validate([
                 'file' => 'required',
                 'txtVideoInfo' => 'required',
+                'sub_title' => 'required',
             ]);
 
 
@@ -161,6 +162,7 @@ class SuperAdminController extends Controller
                     ->update([
                         'video_name' => $filename,
                         'video_info' => $request->txtVideoInfo,
+                        'sub_title' => $request->sub_title,
                         
                     ]);
                     return redirect()->back()->with('success', 'File upload successfully');   

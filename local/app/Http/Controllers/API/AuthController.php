@@ -335,7 +335,7 @@ class AuthController extends Controller
                 ->join('coursecat_list', 'user_coursecat_list.sub_cat_id', '=', 'coursecat_list.id')
                 ->join('course_progress', 'user_coursecat_list.course_id', '=', 'course_progress.course_id')
                 ->where('user_coursecat_list.user_id', $emp_id)
-                ->select('course_list.id as course_id', 'course_list.name', 'course_list.photo as coursePhoto', 'course_list.base_path','coursecat_list.name_cat as sub_cat_name','coursecat_list.photo as cousercat_photo','course_progress.point','coursecat_list.video_name','coursecat_list.video_info')
+                ->select('course_list.id as course_id', 'course_list.name', 'course_list.photo as coursePhoto', 'course_list.base_path','coursecat_list.name_cat as sub_cat_name','coursecat_list.photo as cousercat_photo','course_progress.point','coursecat_list.video_name','coursecat_list.video_info','coursecat_list.sub_title')
                 ->get();
 
 
@@ -359,7 +359,7 @@ class AuthController extends Controller
             ->rightJoin('course_list', 'coursecat_list.course_id', '=', 'course_list.id')
             ->where('coursecat_list.is_deleted', 0)
             ->where('coursecat_list.course_id', $course_id)
-            ->select('course_list.id as cat_id', 'coursecat_list.id as subcat_id', 'course_list.name  as catname', 'coursecat_list.name_cat as sub_catname', 'coursecat_list.photo', 'coursecat_list.base_path','coursecat_list.video_name','coursecat_list.video_info')
+            ->select('course_list.id as cat_id', 'coursecat_list.id as subcat_id', 'course_list.name  as catname', 'coursecat_list.name_cat as sub_catname', 'coursecat_list.photo', 'coursecat_list.base_path','coursecat_list.video_name','coursecat_list.video_info','coursecat_list.sub_title')
             ->get();
 
         $accessToken = '';
