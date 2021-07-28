@@ -140,14 +140,16 @@ class SuperAdminController extends Controller
         }
         if ($request->action == 31) {
           
-            if ($request->hasFile('file')) {
+           
+           
+
                
                 $file = $request->file('file');
-                $filename = $request->txtSID . "_user_Video" . rand(10, 1000) . "_" . date('Ymshis') . '.' . $file->getClientOriginalExtension();
+                $filename = $request->txtSID . "_user_VideoX" . rand(10, 1000) . "_" . date('Ymshis') . '.' . $file->getClientOriginalExtension();
                 // save to local/public/uploads/photo/ as the new $filename
                 //var/www/larachat/local/public/storage/users-avatar
                 $path = $file->storeAs('doc', $filename);
-
+                
                
                 $affected = DB::table('coursecat_list')
                     ->where('id', $request->txtSID,)
@@ -156,8 +158,10 @@ class SuperAdminController extends Controller
                         'video_info' => $request->txtVideoInfo,
                         
                     ]);
-            }
-            return redirect()->back()->with('success', 'File upload successfully');   
+                    return redirect()->back()->with('success', 'File upload successfully');   
+
+            
+           
 
 
         }
