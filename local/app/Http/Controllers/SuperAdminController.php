@@ -142,6 +142,11 @@ class SuperAdminController extends Controller
           
            
            
+            $validated = $request->validate([
+                'file' => 'required',
+                'txtVideoInfo' => 'required',
+            ]);
+
 
                
                 $file = $request->file('file');

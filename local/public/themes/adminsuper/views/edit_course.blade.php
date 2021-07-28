@@ -125,7 +125,7 @@
                                             <label class="col-xl-3 col-lg-3 col-form-label">Course Description</label>
                                             <div class="col-lg-9 col-xl-9">
                                                 
-                                                <textarea class="form-control form-control-solid form-control-lg" name="couser_info"    cols="30" rows="5">{{$data->couser_info}}</textarea>
+                                                <textarea class="form-control form-control-solid form-control-lg summernote" name="couser_info"    cols="30" rows="5">{{$data->couser_info}}</textarea>
 
                                                 <div class="fv-plugins-message-container"></div>
                                             </div>

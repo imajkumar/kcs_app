@@ -15,6 +15,7 @@
         <div class="card-body">
             <div class="card-body p-0">
                 <div class="row justify-content-center py-8 px-8 py-lg-15 px-lg-10">
+                    
                     <div class="col-xl-12 col-xxl-10">
 
 
@@ -25,6 +26,8 @@
         </ul>
     </div>
 @endif
+
+
 
                         <!--begin::Wizard Form-->
                         <form class="form fv-plugins-bootstrap fv-plugins-framework" method="post" action="{{route('uploadFile')}}" enctype="multipart/form-data">
@@ -43,6 +46,9 @@
                                             <input type="file" name="file"  class="custom-file-input" id="customFile" />
                                             <label class="custom-file-label" for="customFile">Choose file</label>
                                         </div>
+                                        @error('file')
+    <div class="alert alert-danger">{{ $message }}</div>
+@enderror
                                     </div>
 
 
@@ -50,9 +56,14 @@
                                     <div class="form-group row fv-plugins-icon-container">
                                         <label class="col-xl-3 col-lg-3 col-form-label">Description</label>
                                         <div class="col-lg-9 col-xl-9">
-                                            <textarea name="txtVideoInfo" id="txtVideoInfo" cols="5" class="form-control" rows="10"></textarea>
+                                        <!-- <div class="summernote"></div> -->
+                                        
+                                            <textarea  name="txtVideoInfo"  data-provide="markdown" id="txtVideoInfo" cols="5" class="form-control summernote" rows="10"></textarea>
 
                                             <div class="fv-plugins-message-container"></div>
+                                            @error('txtVideoInfo')
+    <div class="alert alert-danger">{{ $message }}</div>
+@enderror
                                         </div>
                                     </div>
 

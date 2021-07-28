@@ -593,3 +593,5 @@ jQuery(document).ready(function() {
 } );
 
 //addded course 
+
+
