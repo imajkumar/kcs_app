@@ -17,6 +17,19 @@ class AuthController extends Controller
     //getCompletedCouserByEmpID
     public function getCompletedCouserByEmpID(Request $request)
     {
+        $validatedData = $request->only('emp_id');
+        $rules = [
+
+            'emp_id' => 'required'            
+
+        ];
+        $validator = Validator::make($validatedData, $rules);
+        if ($validator->fails()) {
+            $message = strtoupper('Invalid Input');
+            $message_action = "Auth:Login-001";
+            return $this->setWarningResponse([], $message, $message_action, "", $message_action);
+        }
+
         $emp_id=$request->emp_id;
 
         $usersArr = DB::table('course_progress')
@@ -82,6 +95,21 @@ class AuthController extends Controller
     //setSubCategorywithEmpIDwithSubCatIDCouserID
     public function setSubCategorywithEmpIDwithSubCatIDCouserID(Request $request)
     {
+        $validatedData = $request->only('course_id', 'emp_id');
+        $rules = [
+
+            'course_id' => 'required',
+            'emp_id' => 'required',
+            'sub_cat_id' => 'sub_cat_id',
+
+        ];
+        $validator = Validator::make($validatedData, $rules);
+        if ($validator->fails()) {
+            $message = strtoupper('Invalid Input');
+            $message_action = "Auth:Login-001";
+            return $this->setWarningResponse([], $message, $message_action, "", $message_action);
+        }
+
          $course_id = $request->course_id;
          $emp_id = $request->emp_id;
          $sub_cat_id = $request->sub_cat_id;
@@ -135,7 +163,7 @@ class AuthController extends Controller
             ->join('coursecat_list', 'user_coursecat_list.sub_cat_id', '=', 'coursecat_list.id')
             ->where('user_coursecat_list.user_id', $emp_id)
 
-            ->select('course_list.id as course_id', 'course_list.name', 'course_list.photo as coursePhoto', 'course_list.base_path','coursecat_list.name_cat as sub_cat_name','coursecat_list.photo as cousercat_photo')
+            ->select('course_list.id as course_id', 'course_list.name', 'course_list.photo as coursePhoto', 'course_list.base_path','coursecat_list.name_cat as sub_cat_name','coursecat_list.photo as cousercat_photo','coursecat_list.video_name','coursecat_list.video_info')
             ->get();
 
 
@@ -178,7 +206,7 @@ class AuthController extends Controller
                 ->join('course_list', 'user_course_list.course_id', '=', 'course_list.id')
                 ->where('user_course_list.user_id', $emp_id)
 
-                ->select('course_list.id as course_id', 'course_list.name', 'course_list.photo', 'course_list.base_path')
+                ->select('user_course_list.user_id','course_list.id as course_id', 'course_list.name', 'course_list.photo', 'course_list.base_path')
                 ->get();
 
 
@@ -194,7 +222,7 @@ class AuthController extends Controller
             ->join('course_list', 'user_course_list.course_id', '=', 'course_list.id')
             ->where('user_course_list.user_id', $emp_id)
 
-            ->select('course_list.id as course_id', 'course_list.name', 'course_list.photo', 'course_list.base_path')
+            ->select('user_course_list.user_id','course_list.id as course_id', 'course_list.name', 'course_list.photo', 'course_list.base_path')
             ->get();
 
             $message = strtoupper('Already added');
@@ -288,7 +316,7 @@ class AuthController extends Controller
 
         ->where('user_course_list.user_id', $emp_id)
         ->where('course_progress.point','!=',100)
-        ->select('course_list.id as course_id', 'course_list.name', 'course_list.photo', 'course_list.base_path','course_progress.point')
+        ->select('user_course_list.user_id','course_list.id as course_id', 'course_list.name', 'course_list.photo', 'course_list.base_path','course_progress.point')
         ->get();
 
        
@@ -353,7 +381,20 @@ class AuthController extends Controller
     //getSubCategoryByCateID
     public function getSubCategoryByCateID(Request $request)
     {
-        $course_id = $request->cat_id;
+        $validatedData = $request->only('cat_id');
+        $rules = [
+
+            'cat_id' => 'required'           
+
+        ];
+        $validator = Validator::make($validatedData, $rules);
+        if ($validator->fails()) {
+            $message = strtoupper('Invalid Input');
+            $message_action = "Auth:Login-001";
+            return $this->setWarningResponse([], $message, $message_action, "", $message_action);
+        }
+
+       $course_id = $request->cat_id;
 
         $data = DB::table('coursecat_list')
             ->rightJoin('course_list', 'coursecat_list.course_id', '=', 'course_list.id')

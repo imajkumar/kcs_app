@@ -22,22 +22,24 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 // Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
-Route::post('getProfile', [AuthController::class, 'getProfile']);
-Route::post('updateProfile', [AuthController::class, 'updateProfile']);
+Route::post('login', [AuthController::class, 'login']); //OK
+Route::post('getProfile', [AuthController::class, 'getProfile']); //OK
+Route::post('updateProfile', [AuthController::class, 'updateProfile']); //OK
 Route::get('getCategory', [AuthController::class, 'getCategory']); //OK
-Route::get('getSubCategoryA', [AuthController::class, 'getSubCategory']); //NO
-Route::get('getProgressA', [AuthController::class, 'getProgress']); //NO
+Route::post('getSubCategoryByCateID', [AuthController::class, 'getSubCategoryByCateID']); //OK
 
-Route::post('setCategorywithEmpID', [AuthController::class, 'setCategorywithEmpID']);
-Route::post('setSubCategorywithEmpIDwithSubCatIDCouserID', [AuthController::class, 'setSubCategorywithEmpIDwithSubCatIDCouserID']);
+// Route::get('getSubCategoryA', [AuthController::class, 'getSubCategory']); //NO
+// Route::get('getProgressA', [AuthController::class, 'getProgress']); //NO
+
+Route::post('setCategorywithEmpID', [AuthController::class, 'setCategorywithEmpID']); //this set user added course
+Route::post('setSubCategorywithEmpIDwithSubCatIDCouserID', [AuthController::class, 'setSubCategorywithEmpIDwithSubCatIDCouserID']); //Ok done
 
 
-Route::post('getProgressByEmpID', [AuthController::class, 'getProgressByEmpID']);
+Route::post('getProgressByEmpID', [AuthController::class, 'getProgressByEmpID']); //ok
 
-Route::post('getCategoryByEmpID', [AuthController::class, 'getCategoryByEmpID']);
-Route::post('getSubCategoryByCateID', [AuthController::class, 'getSubCategoryByCateID']);
-Route::post('getSubCategoryByEmpID', [AuthController::class, 'getSubCategoryByEmpID']);
+Route::post('getCategoryByEmpID', [AuthController::class, 'getCategoryByEmpID']); // ok done
+
+Route::post('getSubCategoryByEmpID', [AuthController::class, 'getSubCategoryByEmpID']); //ok done
 Route::post('getCompletedCouserByEmpID', [AuthController::class, 'getCompletedCouserByEmpID']);
 
 Route::fallback(function(){

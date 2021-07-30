@@ -59,7 +59,7 @@
 
                                         <!--begin::Group-->
                                         <div class="form-group row fv-plugins-icon-container">
-                                            <label class="col-xl-3 col-lg-3 col-form-label">Course Category</label>
+                                            <label class="col-xl-3 col-lg-3 col-form-label">Course Sub Category</label>
                                             <div class="col-lg-9 col-xl-9">
                                                 <input class="form-control form-control-solid form-control-lg" name="name_cat" type="text" value="">
                                                 <div class="fv-plugins-message-container"></div>
@@ -72,7 +72,7 @@
                                         <div></div>
                                         <div class="custom-file">
                                             <input type="file" name="file" class="custom-file-input" id="customFile" />
-                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                            <label class="custom-file-label" for="customFile">Choose Video</label>
                                         </div>
                                         @error('file')
                                         <div class="alert alert-danger">{{ $message }}</div>
