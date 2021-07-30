@@ -1055,7 +1055,7 @@ class SuperAdminController extends Controller
                 'IndexID' => $i,
                 'name' => $value->name,
                 'created_by' =>  $usersData->firstname,
-                'created_at' =>  date('J F Y H:iA', strtotime($value->created_at)),
+                'created_at' =>  date('j F Y H:iA', strtotime($value->created_at)),
                 'status' => $value->status,
                 'photo' => $value->photo,
                 'base_path' => $value->base_path,
