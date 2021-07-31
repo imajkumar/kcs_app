@@ -135,15 +135,22 @@ class AuthController extends Controller
                 
 
             ]);
-            $subCourseCounts = DB::table('coursecat_list')
+       
+
+             $UsersubCourseCounts = DB::table('user_coursecat_list')
             ->where('course_id', $course_id)           
             ->count();
+           
 
-            $UsersubCourseCounts = DB::table('user_coursecat_list')
+             $subCourseCounts = DB::table('coursecat_list')
             ->where('course_id', $course_id)           
             ->count();
+           
 
-            $point=($UsersubCourseCounts/$subCourseCounts)/100;
+            
+
+         $point=($UsersubCourseCounts*100)/$subCourseCounts;
+        
 
             
             DB::table('course_progress')
