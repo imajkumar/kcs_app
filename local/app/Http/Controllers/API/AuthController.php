@@ -120,6 +120,16 @@ class AuthController extends Controller
             ->where('sub_cat_id', $sub_cat_id)
             ->where('user_id', $emp_id)
             ->first();
+
+            //check cout of sub cate and how may done 
+            $subCourseCounts = DB::table('coursecat_list')
+            ->where('course_id', $course_id)           
+            ->count();
+
+            $UsersubCourseCounts = DB::table('user_coursecat_list')
+            ->where('course_id', $course_id)           
+            ->count();
+
         if ($courseArr == null) {
 
             DB::table('user_coursecat_list')->insert([
@@ -132,11 +142,14 @@ class AuthController extends Controller
 
             ]);
 
+            $point=($UsersubCourseCounts/$subCourseCounts)/100;
+
+            
             DB::table('course_progress')
             ->updateOrInsert(
                 ['user_id' => $emp_id, 'course_id' => $course_id],
                 [
-                    'point' => '100',
+                    'point' => $point,
                     'created_by' => $emp_id,
                     
                 ]
