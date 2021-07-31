@@ -122,13 +122,7 @@ class AuthController extends Controller
             ->first();
 
             //check cout of sub cate and how may done 
-            $subCourseCounts = DB::table('coursecat_list')
-            ->where('course_id', $course_id)           
-            ->count();
-
-            $UsersubCourseCounts = DB::table('user_coursecat_list')
-            ->where('course_id', $course_id)           
-            ->count();
+            
 
         if ($courseArr == null) {
 
@@ -141,6 +135,13 @@ class AuthController extends Controller
                 
 
             ]);
+            $subCourseCounts = DB::table('coursecat_list')
+            ->where('course_id', $course_id)           
+            ->count();
+
+            $UsersubCourseCounts = DB::table('user_coursecat_list')
+            ->where('course_id', $course_id)           
+            ->count();
 
             $point=($UsersubCourseCounts/$subCourseCounts)/100;
 
