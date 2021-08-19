@@ -2378,6 +2378,8 @@ var KTDatatablesSearchOptionsAdvancedSearch_UserList = (function () {
           orderable: false,
           render: function (data, type, full, meta) {
             var EDIT_URL = BASE_URL + "/edit-user/" + full.RecordID;
+            var EDIT_PASS_URL = BASE_URL + "/edit-user-password/" + full.RecordID;
+
             var VIEW_URL = BASE_URL + "/view-user/" + full.RecordID;
             var ADDCOURSE_URL = BASE_URL + "/add-course-user/" + full.RecordID;
 
@@ -2387,7 +2389,7 @@ var KTDatatablesSearchOptionsAdvancedSearch_UserList = (function () {
 					<a href="${EDIT_URL}" class="btn btn-sm btn-clean btn-icon" title="Edit details">\
 						<i class="la la-edit"></i>\
 					</a>\
-          <a href="${ADDCOURSE_URL}" class="btn btn-sm btn-clean btn-icon" title="Add Course">\
+          <a href="${EDIT_PASS_URL}" class="btn btn-sm btn-clean btn-icon" title="Changes Password">\
           <i class="la la-plus"></i>\
         </a>\
 					<a href="javascript::void(0)" onclick="deleteUser(${full.RecordID})"  class="btn btn-sm btn-clean btn-icon" title="Delete">\

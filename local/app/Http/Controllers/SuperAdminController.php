@@ -964,8 +964,41 @@ class SuperAdminController extends Controller
         return $theme->scope('add_course_user', $data)->render();
     }
 
-    //addCourseUser
+    //changesPass
+    public function changesPass(Request $request)
+    {
+        $request->validate([
+         
+          'password' => 'required|string|min:6|confirmed',
+          'password_confirmation' => 'required',
+        ]);
+        $user_id=$request->txtSID;        
+       
+       
+        User::find($user_id)->update(['password' => Hash::make($request->password)]);
 
+
+      
+
+        return back()->with('success', 'Password successfully changed!');
+    
+}
+    //changesPass
+
+    //addCourseUser
+   //edit_user_password
+   public function edit_user_password($id)
+   {
+       $schoolsArr = DB::table('users')
+           ->where('id', $id)
+           ->first();
+       $theme = Theme::uses('adminsuper')->layout('layout');
+
+       $data = ["data" => $schoolsArr];
+       return $theme->scope('edit_user_password', $data)->render();
+   }
+
+   //edit_user_password
     public function edit_user($id)
     {
         $schoolsArr = DB::table('users')
