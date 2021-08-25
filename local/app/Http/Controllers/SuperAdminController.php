@@ -120,6 +120,8 @@ class SuperAdminController extends Controller
     //uploadFile
     public function uploadFile(Request $request)
     {
+       
+       
         if ($request->action == 1) {
 
             if ($request->hasFile('file')) {
@@ -186,7 +188,7 @@ class SuperAdminController extends Controller
                 'status' => 1
             );
         }
-        if ($request->action == 315) {
+        if ($request->action == 31) {
 
 
 
@@ -1232,7 +1234,7 @@ class SuperAdminController extends Controller
                 'RecordID' => $value->id,
                 'IndexID' => $i,
                 'name' => $usersArr->firstname . " " . $usersArr->lastname,
-                'course' =>  $course_listArr->name,
+                'course' =>  @$course_listArr->name,
                 'point' => $value->point,
                 'created_at' => $value->created_at,
                 'created_by' => $created_byArr->firstname,
