@@ -55,8 +55,8 @@
                                             $baseP = getBaseURL() . "/" . "local/storage/app/doc/";
                                             $videPath = $baseP . $data->video_name;
                                         ?>
-                                            <video width="320" height="240" controls>
-                                                <source src="{{$videPath}}" type="video/mp4 .mp4">
+                                            <video width="320" height="240" controls autoplay>
+                                                <source src="{{$videPath}}" type="video/mp4">                                            
 
                                                 Your browser does not support the video tag.
                                             </video>
