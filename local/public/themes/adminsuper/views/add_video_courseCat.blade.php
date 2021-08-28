@@ -1,6 +1,5 @@
 <!--begin::Container-->
 <div class="container">
-
     <!--begin::Card-->
     <div class="card card-custom">
         <div class="card-header">
@@ -8,17 +7,13 @@
                 <span class="card-icon">
                     <i class="flaticon2-supermarket text-primary"></i>
                 </span>
-                <h3 class="card-label">Add Video and Description to Sub Category</h3>
+                <h3 class="card-label">Add/Edit Video and Description to Sub Category</h3>
             </div>
-
         </div>
         <div class="card-body">
             <div class="card-body p-0">
                 <div class="row justify-content-center py-8 px-8 py-lg-15 px-lg-10">
-
                     <div class="col-xl-12 col-xxl-10">
-
-
                         @if (\Session::has('success'))
                         <div class="alert alert-success">
                             <ul>
@@ -26,9 +21,15 @@
                             </ul>
                         </div>
                         @endif
+                        <?php
+                        // echo "<pre>";
+                        // print_r($data);
 
 
 
+
+
+                        ?>
                         <!--begin::Wizard Form-->
                         <form class="form fv-plugins-bootstrap fv-plugins-framework" method="post" action="{{route('uploadFile')}}" enctype="multipart/form-data">
                             <input type="hidden" id="txtAction" name="txtAction" value="__edit">
@@ -49,44 +50,52 @@
                                         @error('file')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
+                                        <?php
+                                        if (isset($data->video_name)) {
+                                            $baseP = getBaseURL() . "/" . "local/storage/app/doc/";
+                                            $videPath = $baseP . $data->video_name;
+                                        ?>
+                                            <video width="320" height="240" controls>
+                                                <source src="{{$videPath}}" type="video/mp4 .mp4">
+
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        <?php
+                                        } else {
+                                           
+                                        }
+
+                                        ?>
+
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-3 col-form-label">Title</label>
                                         <div class="col-9">
-                                            <input class="form-control" type="text" name="sub_title"  id="example-text-input">
+                                            <input class="form-control" type="text" name="sub_title" id="example-text-input" value="{{$data->sub_title}}">
                                             @error('sub_title')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
-
                                     <!--begin::Group-->
                                     <div class="form-group row fv-plugins-icon-container">
                                         <label class="col-xl-3 col-lg-3 col-form-label">Description</label>
                                         <div class="col-lg-9 col-xl-9">
                                             <!-- <div class="summernote"></div> -->
-
-                                            <textarea name="txtVideoInfo" data-provide="markdown" id="txtVideoInfo" cols="5" class="form-control summernote" rows="10"></textarea>
-
+                                            <textarea name="txtVideoInfo" data-provide="markdown" id="txtVideoInfo" cols="5" class="form-control summernote" rows="10">{{$data->video_info}}</textarea>
                                             <div class="fv-plugins-message-container"></div>
                                             @error('txtVideoInfo')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
-
-
                                     <!--end::Wizard Step 1-->
-
                                     <div class="d-flex justify-content-between border-top pt-10 mt-15">
-
                                         <div>
                                             <button type="submit" class="btn btn-success font-weight-bolder px-9 py-4" data-wizard-type="action-submit">Submit</button>
                                             <button type="button" id="next-step" class="btn btn-primary font-weight-bolder px-9 py-4" data-wizard-type="action-next">Reset</button>
                                         </div>
                                     </div>
-
-
                                 </div>
                             </div>
 

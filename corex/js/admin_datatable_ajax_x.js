@@ -2729,7 +2729,7 @@ var KTDatatablesSearchOptionsAdvancedSearch_UserList = (function () {
 					<a href="${EDIT_URL}" class="btn btn-sm btn-clean btn-icon" title="Edit details">\
 						<i class="la la-edit"></i>\
 					</a>\
-          <a href="${Add_URL}" class="btn btn-sm btn-clean btn-icon" title="Add Video">\
+          <a href="${Add_URL}" class="btn btn-sm btn-success btn-icon" title="Add/Edit Video">\
           <i class="la la-plus"></i>\
         </a>\
 					<a href="javascript::void(0)" onclick="deleteCouseCat(${full.RecordID})"  class="btn btn-sm btn-clean btn-icon" title="Delete">\
