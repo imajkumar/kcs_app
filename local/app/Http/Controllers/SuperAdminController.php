@@ -181,6 +181,7 @@ class SuperAdminController extends Controller
                     ->where('id', $request->txtSID,)
                     ->update([
                         'photo' => $filename,
+                        'status' => 1,
                         'base_path' => getBaseURL() . "/local/storage/app/doc/",
                     ]);
             }

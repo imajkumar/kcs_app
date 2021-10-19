@@ -56,6 +56,7 @@ class AuthController extends Controller
             $courseSubcatArr = DB::table('coursecat_list')
             ->where('id',$sub_cat_id)   
             ->where('is_deleted',0)    
+            ->where('status',1)
             ->first();
 
                $data[]=array(
@@ -144,7 +145,8 @@ class AuthController extends Controller
            
 
              $subCourseCounts = DB::table('coursecat_list')
-            ->where('course_id', $course_id)           
+            ->where('course_id', $course_id)     
+            ->where('status',1)      
             ->count();
            
 
@@ -170,6 +172,7 @@ class AuthController extends Controller
                 ->where('user_coursecat_list.user_id', $emp_id)
                 ->where('course_list.is_deleted', 0)
                 ->where('course_list.status', 1)
+                ->where('coursecat_list.status', 1)
                 ->select('course_list.id as course_id', 'course_list.name', 'course_list.photo as coursePhoto', 'course_list.base_path','coursecat_list.name_cat as sub_cat_name','coursecat_list.photo as cousercat_photo')
                 ->get();
 
@@ -189,6 +192,7 @@ class AuthController extends Controller
             ->where('user_coursecat_list.user_id', $emp_id)
             ->where('course_list.is_deleted', 0)
             ->where('course_list.status', 1)
+            ->where('coursecat_list.status', 1)
             ->select('course_list.id as course_id', 'course_list.name', 'course_list.photo as coursePhoto', 'course_list.base_path','coursecat_list.name_cat as sub_cat_name','coursecat_list.photo as cousercat_photo','coursecat_list.video_name','coursecat_list.video_info')
             ->get();
 
