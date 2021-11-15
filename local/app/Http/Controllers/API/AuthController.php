@@ -496,7 +496,7 @@ class AuthController extends Controller
     //getCategory
     public function getCategory(Request $request)
     {
-        $data = DB::table('course_list')->where('is_deleted', 0)->where('status', 1)
+        $data = DB::table('course_list')->where('is_deleted', 0)->whereNotNull('photo')->where('status', 1)
             ->get();
         $accessToken = '';
 
